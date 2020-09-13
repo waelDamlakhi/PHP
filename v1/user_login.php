@@ -6,24 +6,33 @@ $result = array();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
-    if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) 
+    if (isset($_POST['username']) && isset($_POST['password'])) 
     {
         $db = new DbOperations();
         $user = $db->log_in($_POST['username'], $_POST['password']);
-        if (!empty($user)) {
+        if (!empty($user))
+        {
+            // $_SESSION['user_id'] = $user['Account_id'];
             $result['error'] = false;
-            $result['message'] = "You Are Login";
-        }else {
-            $result['error'] = true;
-            $result['message'] = "You Are Not Login";
+            $result['id'] = $user['Account_id'];
+            $result['username'] = $user['username'];
+            $result['email'] = $user['email'];
+            $result['password'] = $user['Password'];
+            $result['phone'] = $user['phone'];
+            $result['fullname'] = $user['fullname'];
+            
         }
-    }else {
-        $result['error'] = true;
-        $result['message'] = "Required Fields Are Missing";
+        else
+        {
+            $result['error'] = true;
+            $result['message'] =  1;        //Access Deny
+        }
     }
-}else {
+}
+else
+{
     $result['error'] = true;
-    $result['message'] = "You Do Not Have Permission";
+    $result['message'] = 2;                  //You Do Not Have Permission
 }
 
 echo json_encode($result);
