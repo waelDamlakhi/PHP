@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $headers = array
             (
-                'From' => 'mr.wael.mwd@gmail.com',
-                'Reply-To' => 'mr.wael.mwd@gmail.com',
+                'From' => 'aqar.sy.info@gmail.com',
+                'Reply-To' => 'aqar.sy.info@gmail.com',
                 'X-Mailer' => 'PHP/' . phpversion()
             );
             mail($_POST['email'], 'passcode', $_POST['message'], $headers);

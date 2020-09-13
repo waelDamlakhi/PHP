@@ -10,6 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $db = new DbOperations();
         $db->sign_up($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password']);
+        $headers = array
+            (
+                'From' => 'aqar.sy.info@gmail.com',
+                'Reply-To' => 'aqar.sy.info@gmail.com',
+                'X-Mailer' => 'PHP/' . phpversion()
+            );
+        mail($_POST['email'], 'passcode', $_POST['message'], $headers);
         $result['error'] = false;
         
     }
