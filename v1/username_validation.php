@@ -4,14 +4,11 @@ require "../includes/DbOperations.php";
 
 $result = array();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['username'])) 
 {
-    if (isset($_POST['username']) && isset($_POST['password'])) 
-    {
+    
         $db = new DbOperations();
-        $result = $db->log_in($_POST['username'], $_POST['password']);
-        
-    }
+        $result = $db->username_validation($_GET['username']);
 }
 else
 {

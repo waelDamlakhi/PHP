@@ -4,14 +4,11 @@ require "../includes/DbOperations.php";
 
 $result = array();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['Re_id']) && isset($_GET['property_type'])) 
 {
-    if (isset($_POST['username']) && isset($_POST['password'])) 
-    {
+    
         $db = new DbOperations();
-        $result = $db->log_in($_POST['username'], $_POST['password']);
-        
-    }
+        $result = $db->details_post($_GET['Re_id'], $_GET['property_type']);
 }
 else
 {

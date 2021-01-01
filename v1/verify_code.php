@@ -4,14 +4,10 @@ require "../includes/DbOperations.php";
 
 $result = array();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verify_code']) && isset($_POST['id']) && isset($_POST['date'])) 
 {
-    if (isset($_POST['username']) && isset($_POST['password'])) 
-    {
         $db = new DbOperations();
-        $result = $db->log_in($_POST['username'], $_POST['password']);
-        
-    }
+        $result = $db->verify_code($_POST['verify_code'], $_POST['id'], $_POST['date']);
 }
 else
 {

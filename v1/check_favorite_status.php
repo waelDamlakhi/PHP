@@ -4,14 +4,11 @@ require "../includes/DbOperations.php";
 
 $result = array();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id']) && isset($_GET['myfavoritestatus']) && isset($_GET['Re_id'])) 
 {
-    if (isset($_POST['username']) && isset($_POST['password'])) 
-    {
+    
         $db = new DbOperations();
-        $result = $db->log_in($_POST['username'], $_POST['password']);
-        
-    }
+        $result = $db->check_favorite_status($_GET['id'], $_GET['myfavoritestatus'], $_GET['Re_id']);
 }
 else
 {
