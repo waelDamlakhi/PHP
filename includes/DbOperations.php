@@ -13,9 +13,17 @@ class DbOperations
     }
 
     // Check Log In Function
+    public function tkhbes(int $id)
+    {
+        $stamt = $this->con->prepare("SELECT * FROM user_account WHERE Account_id = ?");
+        $stamt->execute(array($id));
+        return $stamt->rowCount() > 0 ? $stamt->fetch() : false;
+    }
+
+    // Check Log In Function
     public function log_in(string $account, string $pass)
     {
-        $stamt = $this->con->prepare("SELECT * FROM user_account WHERE password = ? AND username = ? OR email = ?");
+        $stamt = $this->con->prepare("SELECT * FROM user_account WHERE password = ? AND (username = ? OR email = ?)");
         $stamt->execute(array( $pass, $account, $account));
         return $stamt->rowCount() > 0 ? $stamt->fetch() : false;
     }
